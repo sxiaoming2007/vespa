@@ -9,7 +9,8 @@ import com.yahoo.athenz.zts.InstanceRefreshRequest;
 import com.yahoo.athenz.zts.ZTSClient;
 import com.yahoo.component.AbstractComponent;
 import com.yahoo.jdisc.http.ssl.ReaderForPath;
-import com.yahoo.jdisc.http.ssl.keystore.provider.pem.PemSslKeyStoreFactory;
+import com.yahoo.jdisc.http.ssl.pem.PemKeyStore;
+import com.yahoo.jdisc.http.ssl.pem.PemSslKeyStore;
 import com.yahoo.log.LogLevel;
 import com.yahoo.vespa.hosted.athenz.identityproviderservice.config.AthenzProviderServiceConfig;
 import com.yahoo.vespa.hosted.athenz.instanceproviderservice.impl.FileBackedKeyProvider;
@@ -116,10 +117,10 @@ public class AthenzInstanceProviderService extends AbstractComponent {
                 String privateKey = keyProvider.getPrivateKey(config.keyVersion());
                 String certificate = getCertificateFromZTS(Crypto.loadPrivateKey(privateKey));
                 final KeyStore keyStore =
-                        new PemSslKeyStoreFactory()
-                                .createKeyStore(
+                        new PemSslKeyStore(
+                                new PemKeyStore.KeyStoreLoadParameter(
                                         new ReaderForPath(new StringReader(certificate), null),
-                                        new ReaderForPath(new StringReader(privateKey), null))
+                                        new ReaderForPath(new StringReader(privateKey), null)))
                                 .loadJavaKeyStore();
                 sslContextFactory.reload(sslContextFactory -> sslContextFactory.setKeyStore(keyStore));
                 log.log(LogLevel.INFO, "Athenz certificate reload successfully completed");

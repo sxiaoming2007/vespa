@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yahoo.athenz.auth.util.Crypto;
 import com.yahoo.log.LogLevel;
-import com.yahoo.vespa.hosted.athenz.config.AthenzProviderServiceConfig;
+import com.yahoo.vespa.hosted.athenz.identityproviderservice.config.AthenzProviderServiceConfig;
 import com.yahoo.vespa.hosted.athenz.instanceproviderservice.impl.KeyProvider;
 import com.yahoo.vespa.hosted.athenz.instanceproviderservice.impl.Utils;
 import com.yahoo.vespa.hosted.athenz.instanceproviderservice.impl.model.IdentityDocument;
