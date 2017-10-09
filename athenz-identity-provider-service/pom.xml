@@ -51,7 +51,7 @@
         </dependency>
 
         <!-- PROVIDED -->
-        <!-- BouncyCastle should be avaiable through jdisc_http_service at runtime -->
+        <!-- BouncyCastle should be available through jdisc_http_service at runtime -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
