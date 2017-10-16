@@ -8,8 +8,12 @@ source ${SOURCE_DIR}/travis/cpp-prelude.sh
 BUILD_DIR=~/build
 mkdir "${BUILD_DIR}"
 
+cd ${SOURCE_DIR}
+sh ./bootstrap.sh java
+mvn install --no-snapshot-updates --batch-mode --threads ${NUM_THREADS}
 cd ${BUILD_DIR}
 bash ${SOURCE_DIR}/bootstrap-cpp.sh ${SOURCE_DIR} ${BUILD_DIR}
 make -j ${NUM_THREADS}
 ctest3 --output-on-failure -j ${NUM_THREADS}
 ccache --show-stats
+make install
